@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2024 at 04:06 PM
+-- Generation Time: Apr 07, 2024 at 12:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,6 +50,13 @@ CREATE TABLE `dm_codongho` (
   `ma_co_dong_ho` int(11) NOT NULL,
   `ten_co_dong_ho` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dm_codongho`
+--
+
+INSERT INTO `dm_codongho` (`ma_co_dong_ho`, `ten_co_dong_ho`) VALUES
+(1, 'To');
 
 -- --------------------------------------------------------
 
@@ -160,6 +167,29 @@ CREATE TABLE `ql_nguoidung` (
   `ngay_sinh` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ql_phanquyen`
+--
+
+CREATE TABLE `ql_phanquyen` (
+  `ma_quyen` int(11) NOT NULL,
+  `ma_nhan_vien` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ql_quyen`
+--
+
+CREATE TABLE `ql_quyen` (
+  `ma_quyen` int(11) NOT NULL,
+  `ten_quyen` varchar(100) NOT NULL,
+  `trang_thai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -231,6 +261,18 @@ ALTER TABLE `ql_nguoidung`
   ADD PRIMARY KEY (`ma_nhan_vien`);
 
 --
+-- Indexes for table `ql_phanquyen`
+--
+ALTER TABLE `ql_phanquyen`
+  ADD PRIMARY KEY (`ma_quyen`,`ma_nhan_vien`);
+
+--
+-- Indexes for table `ql_quyen`
+--
+ALTER TABLE `ql_quyen`
+  ADD PRIMARY KEY (`ma_quyen`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -244,7 +286,7 @@ ALTER TABLE `dm_chinhanh`
 -- AUTO_INCREMENT for table `dm_codongho`
 --
 ALTER TABLE `dm_codongho`
-  MODIFY `ma_co_dong_ho` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ma_co_dong_ho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dm_loaidongho`
@@ -293,6 +335,12 @@ ALTER TABLE `dm_toquanly`
 --
 ALTER TABLE `dm_tuyendoc`
   MODIFY `ma_tuyen_doc` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ql_quyen`
+--
+ALTER TABLE `ql_quyen`
+  MODIFY `ma_quyen` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
