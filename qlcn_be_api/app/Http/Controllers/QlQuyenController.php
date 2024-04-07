@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmTuyenDocModel;
+use App\Http\Controllers\Controller;
+use App\Models\QlQuyenModel;
 use Illuminate\Http\Request;
 
-class DmTuyenDocController extends Controller
+class QlQuyenController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return DmTuyenDocModel::all();
+        return QlQuyenModel::all();
     }
 
     /**
@@ -22,24 +23,23 @@ class DmTuyenDocController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $tuyen_doc = new DmTuyenDocModel;
-        $tuyen_doc->ten_tuyen_doc=$request->ten_tuyen_doc;
-        $tuyen_doc->ma_chi_nhanh=$request->ma_chi_nhanh;
-        $tuyen_doc->ma_to_quan_ly=$request->ma_to_quan_ly;
+        $quyen = new QlQuyenModel;
+        $quyen->ten_quyen=$request->ten_quyen;
+        $quyen->trang_thai=$request->trang_thai;
 
-        $result = $tuyen_doc->save();
+        $result = $quyen->save();
         if($result){
             return "success";
         }
         else{
             return "error";
         }
+    
     }
 
     /**
@@ -47,7 +47,7 @@ class DmTuyenDocController extends Controller
      */
     public function show(string $id)
     {
-        return DmTuyenDocModel::where("ten_tuyen_doc","like","%".$id."%")->get();
+        return QlQuyenModel::where("ten_quyen","like","%".$id."%")->get();
     }
 
     /**
@@ -63,17 +63,14 @@ class DmTuyenDocController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $tuyen_doc = DmTuyenDocModel::find($id);
-        if(isset($request->ten_tuyen_doc)){
-            $tuyen_doc->ten_tuyen_doc=$request->ten_tuyen_doc;
+        $quyen = QlQuyenModel::find($id);
+        if(isset($request->ten_quyen)){
+            $quyen->ten_quyen=$request->ten_quyen;
         }
-        if(isset($request->ma_chi_nhanh)){
-            $tuyen_doc->ma_chi_nhanh=$request->ma_chi_nhanh;
+        if(isset($request->trang_thai)){
+            $quyen->trang_thai=$request->trang_thai;
         }
-        if(isset($request->ma_to_quan_ly)){
-            $tuyen_doc->ma_to_quan_ly=$request->ma_to_quan_ly;
-        }
-        $result = $tuyen_doc->save();
+        $result = $quyen->save();
         if($result){
             return "success";
         }
@@ -87,8 +84,8 @@ class DmTuyenDocController extends Controller
      */
     public function destroy(string $id)
     {
-        $tuyen_doc = DmTuyenDocModel::find($id);
-        $result = $tuyen_doc->delete();
+        $quyen = QlQuyenModel::find($id);
+        $result = $quyen->delete();
         if($result){
             return "success";
         }
