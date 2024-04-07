@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmToQuanLyModel;
 use Illuminate\Http\Request;
 
 class DmToQuanLyController extends Controller
@@ -12,7 +12,7 @@ class DmToQuanLyController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmToQuanLyModel::all();
     }
 
     /**
@@ -27,11 +27,11 @@ class DmToQuanLyController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
+        $to_quan_ly = new DmToQuanLyModel;
+        $to_quan_ly->ten_to_quan_ly=$request->ten_to_quan_ly;
+        $to_quan_ly->ma_chi_nhanh=$request->ma_chi_nhanh;
 
-        $result = $chi_nhanh->save();
+        $result = $to_quan_ly->save();
         if($result){
             return "success";
         }
@@ -46,7 +46,7 @@ class DmToQuanLyController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmToQuanLyModel::where("ten_to_quan_ly","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +62,14 @@ class DmToQuanLyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $to_quan_ly = DmToQuanLyModel::find($id);
+        if(isset($request->ten_to_quan_ly)){
+            $to_quan_ly->ten_to_quan_ly=$request->ten_to_quan_ly;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
+        if(isset($request->ma_chi_nhanh)){
+            $to_quan_ly->ma_chi_nhanh=$request->ma_chi_nhanh;
         }
-        $result = $chi_nhanh->save();
+        $result = $to_quan_ly->save();
         if($result){
             return "success";
         }
@@ -83,8 +83,8 @@ class DmToQuanLyController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $to_quan_ly = DmToQuanLyModel::find($id);
+        $result = $to_quan_ly->delete();
         if($result){
             return "success";
         }

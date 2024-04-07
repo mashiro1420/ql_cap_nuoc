@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmTuyenDocModel;
 use Illuminate\Http\Request;
 
 class DmTuyenDocController extends Controller
@@ -12,7 +12,7 @@ class DmTuyenDocController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmTuyenDocModel::all();
     }
 
     /**
@@ -28,11 +28,12 @@ class DmTuyenDocController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
+        $tuyen_doc = new DmTuyenDocModel;
+        $tuyen_doc->ten_tuyen_doc=$request->ten_tuyen_doc;
+        $tuyen_doc->ma_chi_nhanh=$request->ma_chi_nhanh;
+        $tuyen_doc->ma_to_quan_ly=$request->ma_to_quan_ly;
 
-        $result = $chi_nhanh->save();
+        $result = $tuyen_doc->save();
         if($result){
             return "success";
         }
@@ -46,7 +47,7 @@ class DmTuyenDocController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmTuyenDocModel::where("ten_tuyen_doc","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +63,17 @@ class DmTuyenDocController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $tuyen_doc = DmTuyenDocModel::find($id);
+        if(isset($request->ten_tuyen_doc)){
+            $tuyen_doc->ten_tuyen_doc=$request->ten_tuyen_doc;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
+        if(isset($request->ma_chi_nhanh)){
+            $tuyen_doc->ma_chi_nhanh=$request->ma_chi_nhanh;
         }
-        $result = $chi_nhanh->save();
+        if(isset($request->ma_to_quan_ly)){
+            $tuyen_doc->ma_to_quan_ly=$request->ma_to_quan_ly;
+        }
+        $result = $tuyen_doc->save();
         if($result){
             return "success";
         }
@@ -83,8 +87,8 @@ class DmTuyenDocController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $tuyen_doc = DmTuyenDocModel::find($id);
+        $result = $tuyen_doc->delete();
         if($result){
             return "success";
         }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmPhuongXaModel;
 use Illuminate\Http\Request;
 
 class DmPhuongXaController extends Controller
@@ -12,7 +12,7 @@ class DmPhuongXaController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmPhuongXaModel::all();
     }
 
     /**
@@ -28,11 +28,11 @@ class DmPhuongXaController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
+        $phuong_xa = new DmPhuongXaModel;
+        $phuong_xa->ten_phuong_xa=$request->ten_phuong_xa;
+        $phuong_xa->ma_quan_huyen=$request->ma_quan_huyen;
 
-        $result = $chi_nhanh->save();
+        $result = $phuong_xa->save();
         if($result){
             return "success";
         }
@@ -46,7 +46,7 @@ class DmPhuongXaController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmPhuongXaModel::where("ten_phuong_xa","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +62,14 @@ class DmPhuongXaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $phuong_xa = DmPhuongXaModel::find($id);
+        if(isset($request->ten_phuong_xa)){
+            $phuong_xa->ten_phuong_xa=$request->ten_phuong_xa;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
+        if(isset($request->ma_quan_huyen)){
+            $phuong_xa->ma_quan_huyen=$request->ma_quan_huyen;
         }
-        $result = $chi_nhanh->save();
+        $result = $phuong_xa->save();
         if($result){
             return "success";
         }
@@ -83,8 +83,8 @@ class DmPhuongXaController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $phuong_xa = DmPhuongXaModel::find($id);
+        $result = $phuong_xa->delete();
         if($result){
             return "success";
         }

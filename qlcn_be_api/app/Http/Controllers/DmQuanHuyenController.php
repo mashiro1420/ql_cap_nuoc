@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmQuanHuyenModel;
 use Illuminate\Http\Request;
 
 class DmQuanHuyenController extends Controller
@@ -12,7 +12,7 @@ class DmQuanHuyenController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmQuanHuyenModel::all();
     }
 
     /**
@@ -28,11 +28,10 @@ class DmQuanHuyenController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
+        $quan_huyen = new DmQuanHuyenModel;
+        $quan_huyen->ten_quan_huyen=$request->ten_quan_huyen;
 
-        $result = $chi_nhanh->save();
+        $result = $quan_huyen->save();
         if($result){
             return "success";
         }
@@ -46,7 +45,7 @@ class DmQuanHuyenController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmQuanHuyenModel::where("ten_quan_huyen","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +61,11 @@ class DmQuanHuyenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $quan_huyen = DmQuanHuyenModel::find($id);
+        if(isset($request->ten_quan_huyen)){
+            $quan_huyen->ten_quan_huyen=$request->ten_quan_huyen;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
-        }
-        $result = $chi_nhanh->save();
+        $result = $quan_huyen->save();
         if($result){
             return "success";
         }
@@ -83,8 +79,8 @@ class DmQuanHuyenController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $quan_huyen = DmQuanHuyenModel::find($id);
+        $result = $quan_huyen->delete();
         if($result){
             return "success";
         }

@@ -65,9 +65,6 @@ class DmCoDongHoController extends Controller
         if(isset($request->ten_co_dong_ho)){
             $co_dong_ho->ten_co_dong_ho=$request->ten_co_dong_ho;
         }
-        if(isset($request->diachi)){
-            $co_dong_ho->diachi=$request->diachi;
-        }
         $result = $co_dong_ho->save();
         if($result){
             return "success";

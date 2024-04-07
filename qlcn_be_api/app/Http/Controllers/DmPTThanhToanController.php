@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmPTThanhToanModel;
 use Illuminate\Http\Request;
 
 class DmPTThanhToanController extends Controller
@@ -12,7 +12,7 @@ class DmPTThanhToanController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmPTThanhToanModel::all();
     }
 
     /**
@@ -28,11 +28,10 @@ class DmPTThanhToanController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
+        $phuong_thuc_thanh_toan = new DmPTThanhToanModel;
+        $phuong_thuc_thanh_toan->ten_phuong_thuc_thanh_toan=$request->ten_phuong_thuc_thanh_toan;
 
-        $result = $chi_nhanh->save();
+        $result = $phuong_thuc_thanh_toan->save();
         if($result){
             return "success";
         }
@@ -46,7 +45,7 @@ class DmPTThanhToanController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmPTThanhToanModel::where("ten_phuong_thuc_thanh_toan","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +61,11 @@ class DmPTThanhToanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $phuong_thuc_thanh_toan = DmPTThanhToanModel::find($id);
+        if(isset($request->ten_phuong_thuc_thanh_toan)){
+            $phuong_thuc_thanh_toan->ten_phuong_thuc_thanh_toan=$request->ten_phuong_thuc_thanh_toan;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
-        }
-        $result = $chi_nhanh->save();
+        $result = $phuong_thuc_thanh_toan->save();
         if($result){
             return "success";
         }
@@ -83,8 +79,8 @@ class DmPTThanhToanController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $phuong_thuc_thanh_toan = DmPTThanhToanModel::find($id);
+        $result = $phuong_thuc_thanh_toan->delete();
         if($result){
             return "success";
         }

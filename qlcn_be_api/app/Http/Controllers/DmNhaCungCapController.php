@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DmChiNhanhModel;
+use App\Models\DmNhaCungCapModel;
 use Illuminate\Http\Request;
 
 class DmNhaCungCapController extends Controller
@@ -12,7 +12,7 @@ class DmNhaCungCapController extends Controller
      */
     public function index()
     {
-        return DmChiNhanhModel::all();
+        return DmNhaCungCapModel::all();
     }
 
     /**
@@ -28,11 +28,9 @@ class DmNhaCungCapController extends Controller
      */
     public function store(Request $request)
     {
-        $chi_nhanh = new DmChiNhanhModel;
-        $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
-        $chi_nhanh->dia_chi=$request->dia_chi;
-
-        $result = $chi_nhanh->save();
+        $nha_cung_cap = new DmNhaCungCapModel;
+        $nha_cung_cap->ten_nha_cung_cap=$request->ten_nha_cung_cap;
+        $result = $nha_cung_cap->save();
         if($result){
             return "success";
         }
@@ -46,7 +44,7 @@ class DmNhaCungCapController extends Controller
      */
     public function show(string $id)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        return DmNhaCungCapModel::where("ten_nha_cung_cap","like","%".$id."%")->get();
     }
 
     /**
@@ -62,14 +60,11 @@ class DmNhaCungCapController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        if(isset($request->ten_chi_nhanh)){
-            $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
+        $nha_cung_cap = DmNhaCungCapModel::find($id);
+        if(isset($request->ten_nha_cung_cap)){
+            $nha_cung_cap->ten_nha_cung_cap=$request->ten_nha_cung_cap;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
-        }
-        $result = $chi_nhanh->save();
+        $result = $nha_cung_cap->save();
         if($result){
             return "success";
         }
@@ -83,8 +78,8 @@ class DmNhaCungCapController extends Controller
      */
     public function destroy(string $id)
     {
-        $chi_nhanh = DmChiNhanhModel::find($id);
-        $result = $chi_nhanh->delete();
+        $nha_cung_cap = DmNhaCungCapModel::find($id);
+        $result = $nha_cung_cap->delete();
         if($result){
             return "success";
         }

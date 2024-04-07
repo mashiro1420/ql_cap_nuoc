@@ -66,8 +66,8 @@ class DmChiNhanhController extends Controller
         if(isset($request->ten_chi_nhanh)){
             $chi_nhanh->ten_chi_nhanh=$request->ten_chi_nhanh;
         }
-        if(isset($request->diachi)){
-            $chi_nhanh->diachi=$request->diachi;
+        if(isset($request->dia_chi)){
+            $chi_nhanh->dia_chi=$request->dia_chi;
         }
         $result = $chi_nhanh->save();
         if($result){
