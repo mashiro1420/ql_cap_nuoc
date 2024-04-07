@@ -10,6 +10,9 @@ use App\Http\Controllers\DmPTThanhToanController;
 use App\Http\Controllers\DmQuanHuyenController;
 use App\Http\Controllers\DmToQuanLyController;
 use App\Http\Controllers\DmTuyenDocController;
+use App\Http\Controllers\QlNguoiDungController;
+use App\Http\Controllers\QlPhanQuyenController;
+use App\Http\Controllers\QlQuyenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +29,8 @@ Route::apiResource("pt_thanh_toan",DmPTThanhToanController::class);
 Route::apiResource("quan_huyen",DmQuanHuyenController::class);
 Route::apiResource("to_quan_ly",DmToQuanLyController::class);
 Route::apiResource("tuyen_doc",DmTuyenDocController::class);
+Route::apiResource("nguoi_dung",QlNguoiDungController::class);
+Route::apiResource("quyen",QlQuyenController::class);
+Route::apiResource("phan_quyen",QlPhanQuyenController::class);
+Route::get('/nguoi_dung', [QlNguoiDungController::class, 'show']);
+Route::get('/phan_quyen', [QlPhanQuyenController::class, 'show']);

@@ -51,10 +51,32 @@ class QlNguoiDungController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request,string $id)
+    public function show(Request $request)
     {
-
-        return QlNguoiDungModel::where("ten_nguoi_dung","like","%".$id."%")->get();
+        $query = QlNguoiDungModel::query();
+        if($request->has('ma_nhan_vien')){
+            $query->where('ma_nhan_vien',"like","%".$request->ma_nhan_vien."%");
+        }
+        if($request->has('chuc_vu')){
+            $query->where('chuc_vu',"like","%".$request->chuc_vu."%");
+        }
+        if($request->has('sdt')){
+            $query->where('sdt',"like","%".$request->sdt."%");
+        }
+        if($request->has('ten_nguoi_dung')){
+            $query->where('ten_nguoi_dung',"like","%".$request->ten_nguoi_dung."%");
+        }
+        if($request->has('email')){
+            $query->where('email',"like","%".$request->email."%");
+        }
+        if($request->has('ngay_sinh')){
+            $query->where('ngay_sinh',$request->ngay_sinh);
+        }
+        if($request->has('trang_thai')){
+            $query->where('trang_thai',$request->trang_thai);
+        }
+        $result = $query->get();
+        return $result;
     }
 
     /**
