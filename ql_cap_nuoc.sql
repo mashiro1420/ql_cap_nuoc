@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2024 at 12:30 PM
+-- Generation Time: Apr 09, 2024 at 05:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -153,6 +153,65 @@ CREATE TABLE `dm_tuyendoc` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ls_chisodhkhoi`
+--
+
+CREATE TABLE `ls_chisodhkhoi` (
+  `ma_lich_su` int(11) NOT NULL,
+  `ma_dong_ho_khoi` int(11) NOT NULL,
+  `ky_chi_so` int(11) NOT NULL,
+  `tu_ngay` date NOT NULL,
+  `den_ngay` date NOT NULL,
+  `khoa` int(11) NOT NULL,
+  `chi_so_cu` int(11) NOT NULL,
+  `chi_so_moi` int(11) NOT NULL,
+  `so_tieu_thu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ql_donghokhoi`
+--
+
+CREATE TABLE `ql_donghokhoi` (
+  `ma_dong_ho_khoi` int(11) NOT NULL,
+  `ten_dong_ho_khoi` varchar(100) NOT NULL,
+  `tinh_trang` int(11) NOT NULL,
+  `so_tieu_thu` int(11) NOT NULL,
+  `ma_lich_su` int(11) NOT NULL,
+  `so_tieu_thu_cu` int(11) NOT NULL,
+  `chi_so_cu` int(11) NOT NULL,
+  `trang_thai_dong_ho` int(11) NOT NULL,
+  `ngay_nhap` date NOT NULL,
+  `ma_co_dong_ho` int(11) NOT NULL,
+  `ma_nha_cung_cap` int(11) NOT NULL,
+  `ma_loai_dong_ho` int(11) NOT NULL,
+  `so_nam_hieu_luc` int(11) NOT NULL,
+  `ma_lap_dat` int(11) NOT NULL,
+  `ngay_kiem_dinh` date NOT NULL,
+  `so_thang_bao_hanh` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ql_gianuoc`
+--
+
+CREATE TABLE `ql_gianuoc` (
+  `ma_nhom_gia` int(11) NOT NULL,
+  `ten_nhom_gia` varchar(100) NOT NULL,
+  `ma_loai_khach_hang` int(11) NOT NULL,
+  `gia_0_10` int(11) NOT NULL,
+  `gia_10_20` int(11) NOT NULL,
+  `gia_20_30` int(11) NOT NULL,
+  `gia_tren_30` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ql_nguoidung`
 --
 
@@ -167,6 +226,14 @@ CREATE TABLE `ql_nguoidung` (
   `ngay_sinh` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ql_nguoidung`
+--
+
+INSERT INTO `ql_nguoidung` (`ma_nhan_vien`, `mat_khau`, `ten_nguoi_dung`, `chuc_vu`, `trang_thai`, `sdt`, `email`, `ngay_sinh`) VALUES
+('1420', 'a', 'Manh', 'intern', 1, '0123423232', 'a@gmail.com', '0000-00-00'),
+('2207', 'a', 'Hien', 'Boss', 0, '0123445545', 'b', '2024-04-01');
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +244,14 @@ CREATE TABLE `ql_phanquyen` (
   `ma_quyen` int(11) NOT NULL,
   `ma_nhan_vien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ql_phanquyen`
+--
+
+INSERT INTO `ql_phanquyen` (`ma_quyen`, `ma_nhan_vien`) VALUES
+(1, 1420),
+(2, 2207);
 
 -- --------------------------------------------------------
 
@@ -189,6 +264,14 @@ CREATE TABLE `ql_quyen` (
   `ten_quyen` varchar(100) NOT NULL,
   `trang_thai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ql_quyen`
+--
+
+INSERT INTO `ql_quyen` (`ma_quyen`, `ten_quyen`, `trang_thai`) VALUES
+(1, 'admin', 1),
+(2, 'user', 1);
 
 --
 -- Indexes for dumped tables
@@ -253,6 +336,24 @@ ALTER TABLE `dm_toquanly`
 --
 ALTER TABLE `dm_tuyendoc`
   ADD PRIMARY KEY (`ma_tuyen_doc`);
+
+--
+-- Indexes for table `ls_chisodhkhoi`
+--
+ALTER TABLE `ls_chisodhkhoi`
+  ADD PRIMARY KEY (`ma_lich_su`);
+
+--
+-- Indexes for table `ql_donghokhoi`
+--
+ALTER TABLE `ql_donghokhoi`
+  ADD PRIMARY KEY (`ma_dong_ho_khoi`);
+
+--
+-- Indexes for table `ql_gianuoc`
+--
+ALTER TABLE `ql_gianuoc`
+  ADD PRIMARY KEY (`ma_nhom_gia`);
 
 --
 -- Indexes for table `ql_nguoidung`
@@ -337,10 +438,28 @@ ALTER TABLE `dm_tuyendoc`
   MODIFY `ma_tuyen_doc` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `ls_chisodhkhoi`
+--
+ALTER TABLE `ls_chisodhkhoi`
+  MODIFY `ma_lich_su` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ql_donghokhoi`
+--
+ALTER TABLE `ql_donghokhoi`
+  MODIFY `ma_dong_ho_khoi` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ql_gianuoc`
+--
+ALTER TABLE `ql_gianuoc`
+  MODIFY `ma_nhom_gia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `ql_quyen`
 --
 ALTER TABLE `ql_quyen`
-  MODIFY `ma_quyen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ma_quyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
