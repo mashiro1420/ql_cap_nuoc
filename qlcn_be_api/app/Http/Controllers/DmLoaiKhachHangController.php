@@ -43,9 +43,17 @@ class DmLoaiKhachHangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        return DmLoaiKhachHangModel::where("ten_loai_khach_hang","like","%".$id."%")->get();
+        $query = DmLoaiKhachHangModel::select('*');
+        if($request->has('ma_loai_khach_hang')){
+            $query->where('ma_loai_khach_hang',$request->ma_loai_khach_hang);
+        }
+        if($request->has('ten_loai_khach_hang')){
+            $query->where('ten_loai_khach_hang',"like","%".$request->ten_loai_khach_hang."%");
+        }
+        $result = $query->get();
+        return $result;
     }
 
     /**

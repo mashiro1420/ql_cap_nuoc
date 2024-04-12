@@ -44,11 +44,23 @@ class DmChiNhanhController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        return DmChiNhanhModel::where("ten_chi_nhanh","like","%".$id."%")->get();
+        
+        $query = DmChiNhanhModel::select('ma_chi_nhanh','ten_chi_nhanh','dia_chi');
+        if($request->has('ma_chi_nhanh')){
+            $query->where('ma_chi_nhanh',"like","%".$request->ma_chi_nhanh."%");
+        }
+        if($request->has('dia_chi')){
+            $query->where('dia_chi',"like","%".$request->dia_chi."%");
+        }
+        if($request->has('ten_chi_nhanh')){
+            $query->where("ten_chi_nhanh","like","%".$request->ten_chi_nhanh."%");
+        }
+        $result = $query->get();
+        return $result;
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */

@@ -12,7 +12,8 @@ class DmToQuanLyController extends Controller
      */
     public function index()
     {
-        return DmToQuanLyModel::all();
+        return DmToQuanLyModel::select('ma_to_quan_ly','ten_to_quan_ly','dm_chinhanh.ten_chi_nhanh')
+        ->join('dm_chinhanh','dm_toquanly.ma_chi_nhanh','=','dm_chinhanh.ma_chi_nhanh');
     }
 
     /**
@@ -44,10 +45,23 @@ class DmToQuanLyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        return DmToQuanLyModel::where("ten_to_quan_ly","like","%".$id."%")->get();
+        $query = DmToQuanLyModel::select('ma_to_quan_ly','ten_to_quan_ly','dm_chinhanh.ten_chi_nhanh')
+        ->join('dm_chinhanh','dm_toquanly.ma_chi_nhanh','=','dm_chinhanh.ma_chi_nhanh');
+        if($request->has('ma_to_quan_ly')){
+            $query->where('ma_to_quan_ly',"like","%".$request->ma_to_quan_ly."%");
+        }
+        if($request->has('ma_chi_nhanh')){
+            $query->where('ma_chi_nhanh',$request->ma_chi_nhanh);
+        }
+        if($request->has('ten_to_quan_ly')){
+            $query->where("ten_to_quan_ly","like","%".$request->ten_to_quan_ly."%");
+        }
+        $result = $query->get();
+        return $result;
     }
+    
 
     /**
      * Show the form for editing the specified resource.
